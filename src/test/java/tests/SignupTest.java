@@ -34,6 +34,6 @@ public class SignupTest extends BaseTest {
         Assert.assertTrue(loginPage.isSignupSuccessful(), "El mensaje de éxito de registro no apareció");
 
         // Paso 6: Cerramos el popup dando clic en OK
-        loginPage.closeSuccessPopup();
+        loginPage.closePopup();
     }
 }
