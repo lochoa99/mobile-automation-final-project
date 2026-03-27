@@ -10,23 +10,20 @@ import java.net.URL;
 import java.time.Duration;
 
 public class BaseTest {
-
     protected AndroidDriver driver;
 
     @BeforeMethod
     public void setUp() throws MalformedURLException {
-
         UiAutomator2Options options = new UiAutomator2Options();
         options.setPlatformName("Android");
         options.setDeviceName("emulator-5554");
         options.setAutomationName("UiAutomator2");
 
-
-        // Usamos el paquete y la actividad de la app ya instalada
         options.setAppPackage("com.wdiodemoapp");
         options.setAppActivity("com.wdiodemoapp.MainActivity");
 
-        // Le damos a Appium 120 segundos (120000 ms) para conectarse al emulador en lugar de 30.
+        // ¡El requerimiento del profesor! Asegura un estado limpio antes de ejecutar test cases
+        options.setCapability("appium:fullReset", true);
         options.setCapability("uiautomator2ServerLaunchTimeout", 120000);
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
