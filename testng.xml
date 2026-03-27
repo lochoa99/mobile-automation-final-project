@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="WebdriverIO App Test Suite">
+    <test name="Regression Tests">
+        <classes>
+            <class name="tests.NavigationTest"/>
+            <class name="tests.SignupTest"/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.SwipeTest"/>
+        </classes>
+    </test>
+</suite>
