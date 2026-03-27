@@ -2,15 +2,15 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.MenuPage;
-import pages.SwipePage;
+import screens.MenuScreen;
+import screens.SwipeScreen;
 
 public class SwipeTest extends BaseTest {
 
     @Test
     public void testSwipeAndScroll() {
-        MenuPage menuPage = new MenuPage(driver);
-        SwipePage swipePage = new SwipePage(driver);
+        MenuScreen menuPage = new MenuScreen(driver);
+        SwipeScreen swipePage = new SwipeScreen(driver);
 
         // Paso 1: Navegar a la sección Swipe
         menuPage.navigateToSwipe();

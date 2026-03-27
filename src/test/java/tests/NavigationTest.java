@@ -2,19 +2,19 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.MenuPage;
-import pages.SwipePage;
+import screens.HomeScreen;
+import screens.LoginScreen;
+import screens.MenuScreen;
+import screens.SwipeScreen;
 
 public class NavigationTest extends BaseTest {
 
     @Test
     public void testBottomNavigation() {
-        MenuPage menuPage = new MenuPage(driver);
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = new LoginPage(driver);
-        SwipePage swipePage = new SwipePage(driver);
+        MenuScreen menuPage = new MenuScreen(driver);
+        HomeScreen homePage = new HomeScreen(driver);
+        LoginScreen loginPage = new LoginScreen(driver);
+        SwipeScreen swipePage = new SwipeScreen(driver);
 
         // Validar condición inicial: estamos en Home [cite: 18]
         Assert.assertTrue(homePage.isHomePageDisplayed(), "El Home no se mostró correctamente al iniciar");

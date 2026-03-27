@@ -3,15 +3,15 @@ package tests;
 import com.github.javafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.MenuPage;
+import screens.LoginScreen;
+import screens.MenuScreen;
 
 public class SignupTest extends BaseTest {
 
     @Test
     public void testSuccessfulSignUp() {
-        MenuPage menuPage = new MenuPage(driver);
-        LoginPage loginPage = new LoginPage(driver);
+        MenuScreen menuPage = new MenuScreen(driver);
+        LoginScreen loginPage = new LoginScreen(driver);
 
         // Inicializamos Faker para generar un email aleatorio cada vez que corra la prueba
         Faker faker = new Faker();

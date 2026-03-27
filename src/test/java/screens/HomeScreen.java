@@ -1,15 +1,15 @@
-package pages;
+package screens;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
-public class HomePage extends BasePage {
+public class HomeScreen extends BaseScreen {
 
     // Localizamos el título principal del Home
     private final By homeTitle = AppiumBy.androidUIAutomator("new UiSelector().text(\"WEBDRIVER\")");
 
-    public HomePage(AndroidDriver driver) {
+    public HomeScreen(AndroidDriver driver) {
         super(driver);
     }
 

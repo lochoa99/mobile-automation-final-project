@@ -1,4 +1,4 @@
-package pages;
+package screens;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -10,12 +10,12 @@ import org.openqa.selenium.interactions.Sequence;
 import java.time.Duration;
 import java.util.Collections;
 
-public class SwipePage extends BasePage {
+public class SwipeScreen extends BaseScreen {
 
     private final By swipeScreenTitle = AppiumBy.androidUIAutomator("new UiSelector().text(\"Swipe horizontal\")");
     private final By hiddenText = AppiumBy.androidUIAutomator("new UiSelector().text(\"You found me!!!\")");
 
-    public SwipePage(AndroidDriver driver) {
+    public SwipeScreen(AndroidDriver driver) {
         super(driver);
     }
 

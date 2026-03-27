@@ -1,10 +1,10 @@
-package pages;
+package screens;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
-public class LoginPage extends BasePage {
+public class LoginScreen extends BaseScreen {
 
     private final By loginScreenTitle = AppiumBy.androidUIAutomator("new UiSelector().text(\"Login / Sign up Form\")");
 
@@ -23,7 +23,7 @@ public class LoginPage extends BasePage {
     private final By loginSuccessTitle = AppiumBy.androidUIAutomator("new UiSelector().text(\"Success\")");
     private final By okButtonPopup = AppiumBy.androidUIAutomator("new UiSelector().text(\"OK\")");
 
-    public LoginPage(AndroidDriver driver) {
+    public LoginScreen(AndroidDriver driver) {
         super(driver);
     }
 

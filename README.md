@@ -26,7 +26,7 @@ mobile-automation-final-project/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   ├── pages/              # Page Object Models
+│   │   │   ├── screens/              # Page Object Models
 │   │   │   │   ├── BasePage.java
 │   │   │   │   ├── HomePage.java
 │   │   │   │   ├── LoginPage.java
