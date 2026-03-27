@@ -6,23 +6,25 @@ import org.openqa.selenium.By;
 
 public class MenuPage extends BasePage {
 
-    private final By homeIcon = AppiumBy.accessibilityId("Home");
-    private final By loginIcon = AppiumBy.accessibilityId("Login");
-    private final By swipeIcon = AppiumBy.accessibilityId("Swipe");
+    // Localizadores del menú inferior
+    private final By homeMenuButton = AppiumBy.accessibilityId("Home"); // ¡Agregamos el botón Home!
+    private final By loginMenuButton = AppiumBy.accessibilityId("Login");
+    private final By swipeMenuButton = AppiumBy.accessibilityId("Swipe");
 
     public MenuPage(AndroidDriver driver) {
         super(driver);
     }
 
+    // Métodos de navegación
     public void navigateToHome() {
-        click(homeIcon);
+        click(homeMenuButton);
     }
 
     public void navigateToLogin() {
-        click(loginIcon);
+        click(loginMenuButton);
     }
 
     public void navigateToSwipe() {
-        click(swipeIcon);
+        click(swipeMenuButton);
     }
 }

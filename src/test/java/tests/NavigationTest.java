@@ -25,7 +25,7 @@ public class NavigationTest extends BaseTest {
 
         // Navegar a Swipe y validar [cite: 20, 21]
         menuPage.navigateToSwipe();
-        Assert.assertTrue(swipePage.isSwipePageDisplayed(), "No se pudo validar la pantalla de Swipe");
+        Assert.assertTrue(swipePage.isSwipeScreenDisplayed(), "No se pudo validar la pantalla de Swipe");
 
         // Volver a Home y validar [cite: 20, 21]
         menuPage.navigateToHome();
