@@ -1,6 +1,7 @@
 # 🚀 Mobile Automation Final Project
 
 Un proyecto de automatización de pruebas para aplicaciones móviles Android utilizando **Appium**, **Selenium** y **TestNG**. Implementa el patrón **Page Object Model** para mantener un código mantenible y escalable.
+Desarrollado por LUIS MATEO OCHOA AGUDELO
 
 ## 📋 Descripción
 
@@ -10,14 +11,17 @@ Este proyecto automatiza pruebas de regresión para aplicaciones móviles Androi
 - **Navegación**: Flujos de navegación en la aplicación
 - **Interacciones**: Gestos como swipe en la aplicación
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologías y Versiones Específicas
 
-- **Java 8+**: Lenguaje de programación
-- **Appium 8.6.0**: Framework de automatización móvil
-- **Selenium 4.13.0**: Biblioteca de automatización web
-- **TestNG 7.8.0**: Framework de testing
-- **Maven**: Gestor de dependencias y proyectos
-- **Java Faker 1.0.2**: Generación de datos de prueba
+Para garantizar la estabilidad y compatibilidad (evitando errores de clases no encontradas), el proyecto utiliza:
+
+- **Java JDK**: 17 (Amazon Corretto / OpenJDK)
+- **Appium Java Client**: 8.6.0
+- **Selenium Java**: 4.13.0
+- **TestNG**: 7.8.0
+- **Java Faker**: 1.0.2 (Para generación de datos dinámicos)
+- **Maven**: 3.6+
+- **Appium Server**: 2.x con Driver **UiAutomator2**
 
 ## 📁 Estructura del Proyecto
 
