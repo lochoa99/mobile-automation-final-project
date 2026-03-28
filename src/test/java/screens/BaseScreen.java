@@ -3,6 +3,7 @@ package screens;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,21 +17,20 @@ public class BaseScreen {
 
     public BaseScreen(AndroidDriver driver) {
         this.driver = driver;
-        // Se implementa WebDriverWait como se discutió en clase para manejar la visibilidad
+        // Estrategia de Explicit Wait solicitada en clase (10 segundos)
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Inicialización del driver y localización de elementos usando Page Factory
+        // Inicialización de PageFactory usando el decorador de Appium
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    // Manejo de excepciones con Try-Catch para NoSuchElementException
-    // Validando con visibilityOf dentro de ExpectedConditions [cite: 94, 154]
+    // Manejo robusto de excepciones con Try-Catch para NoSuchElementException
     protected boolean isElementVisible(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return element.isDisplayed();
-        } catch (NoSuchElementException | org.openqa.selenium.TimeoutException e) {
-            System.out.println("Elemento no encontrado: " + e.getMessage());
+        } catch (NoSuchElementException | TimeoutException e) {
+            System.out.println("Elemento no visible en el tiempo esperado: " + e.getMessage());
             return false;
         }
     }

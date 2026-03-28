@@ -1,19 +1,20 @@
 package screens;
 
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.WebElement;
 
 public class HomeScreen extends BaseScreen {
 
-    // Localizamos el título principal del Home
-    private final By homeTitle = AppiumBy.androidUIAutomator("new UiSelector().text(\"WEBDRIVER\")");
+    // Validamos que el home cargue correctamente
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"WEBDRIVER\")")
+    private WebElement homeScreenTitle;
 
     public HomeScreen(AndroidDriver driver) {
         super(driver);
     }
 
-    public boolean isHomePageDisplayed() {
-        return isElementVisible(homeTitle);
+    public boolean isHomeScreenDisplayed() {
+        return isElementVisible(homeScreenTitle);
     }
 }

@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class MenuScreen extends BaseScreen {
 
-    // --- Localizadores con Page Factory ---
-
     @AndroidFindBy(accessibility = "Home")
     private WebElement homeMenuButton;
 
@@ -20,8 +18,6 @@ public class MenuScreen extends BaseScreen {
     public MenuScreen(AndroidDriver driver) {
         super(driver);
     }
-
-    // --- Métodos de navegación ---
 
     public void navigateToHome() {
         click(homeMenuButton);
