@@ -1,15 +1,21 @@
 # 🚀 Mobile Automation Final Project
 
 Un proyecto de automatización de pruebas para aplicaciones móviles Android utilizando **Appium**, **Selenium** y **TestNG**. Implementa el patrón **Page Object Model** para mantener un código mantenible y escalable.
-Desarrollado por LUIS MATEO OCHOA AGUDELO
+
+**Desarrollado por:** LUIS MATEO OCHOA AGUDELO
+
+---
 
 ## 📋 Descripción
 
 Este proyecto automatiza pruebas de regresión para aplicaciones móviles Android, cubriendo escenarios de:
 - **Login**: Validación de credenciales y autenticación
+- **Login Inválido**: Pruebas de casos de error y validación de mensajes
 - **Signup**: Registro de nuevos usuarios
 - **Navegación**: Flujos de navegación en la aplicación
 - **Interacciones**: Gestos como swipe en la aplicación
+
+---
 
 ## 🛠️ Tecnologías y Versiones Específicas
 
@@ -23,51 +29,71 @@ Para garantizar la estabilidad y compatibilidad (evitando errores de clases no e
 - **Maven**: 3.6+
 - **Appium Server**: 2.x con Driver **UiAutomator2**
 
+---
+
 ## 📁 Estructura del Proyecto
 
 ```
 mobile-automation-final-project/
 ├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   ├── screens/              # Page Object Models
-│   │   │   │   ├── BasePage.java
-│   │   │   │   ├── HomePage.java
-│   │   │   │   ├── LoginPage.java
-│   │   │   │   ├── MenuPage.java
-│   │   │   │   └── SwipePage.java
-│   │   │   └── utils/              # Clases de utilidad
-│   │   └── resources/              # Archivos de recursos
 │   └── test/
 │       └── java/
-│           └── tests/              # Clases de prueba
-│               ├── BaseTest.java
-│               ├── LoginTest.java
-│               ├── NavigationTest.java
-│               ├── SignupTest.java
-│               └── SwipeTest.java
-├── pom.xml                         # Configuración de Maven
-├── testng.xml                      # Configuración de TestNG
+│           ├── screens/                    # Page Object Models
+│           │   ├── BaseScreen.java         # Clase base con métodos reutilizables
+│           │   ├── HomeScreen.java         # Page Object para la pantalla principal
+│           │   ├── LoginScreen.java        # Page Object para login
+│           │   ├── MenuScreen.java         # Page Object para el menú
+│           │   └── SwipeScreen.java        # Page Object para gestos de swipe
+│           └── tests/                      # Clases de prueba (Test Cases)
+│               ├── BaseTest.java           # Clase base con setup/teardown
+│               ├── LoginTest.java          # Pruebas de login válido
+│               ├── InvalidLoginTest.java   # Pruebas de login inválido
+│               ├── NavigationTest.java     # Pruebas de navegación
+│               ├── SignupTest.java         # Pruebas de registro
+│               └── SwipeTest.java          # Pruebas de gestos swipe
+├── target/                                 # Archivos compilados (generado por Maven)
+│   ├── classes/
+│   ├── test-classes/
+│   └── surefire-reports/                   # Reportes de pruebas
+├── pom.xml                                 # Configuración de Maven
+├── testng.xml                              # Configuración de TestNG
 └── README.md
 ```
 
+---
+
 ## ✨ Características Principales
 
-### Page Object Model (POM)
-- **BasePage**: Clase base con métodos reutilizables (click, sendKeys, waitForVisibility)
-- **Pages específicas**: HomePage, LoginPage, MenuPage, SwipePage con elementos y acciones particulares
+### 🔧 Page Object Model (POM)
+- **BaseScreen**: Clase base con métodos reutilizables para todas las operaciones comunes
+  - `click()` - Hacer click en elementos
+  - `sendKeys()` - Enviar texto a campos
+  - `waitForVisibility()` - Esperar a que elementos sean visibles
+  - `isDisplayed()` - Verificar si un elemento está visible
+  
+- **Screens específicas**: 
+  - `HomeScreen` - Pantalla principal de la aplicación
+  - `LoginScreen` - Pantalla de login con campos de usuario y contraseña
+  - `MenuScreen` - Menú de navegación de la aplicación
+  - `SwipeScreen` - Pantalla para pruebas de gestos
 
-### Gestión de Waits
+### ⏱️ Gestión de Waits
 - Esperas explícitas configurables (por defecto 10 segundos)
 - Manejo inteligente de elementos con visibilidad controlada
+- Prevención de falsos negativos por timing
 
-### Generación de Datos de Prueba
-- Utiliza JavaFaker para generar datos dinámicos en tests
+### 📊 Generación de Datos de Prueba
+- Utiliza **JavaFaker** para generar datos dinámicos en tests
+- Datos únicos y aleatorios para cada ejecución
+- Facilita la reutilización de scripts de prueba
 
-### TestNG
-- Anotaciones @BeforeMethod y @AfterMethod para setup y teardown
-- Suite de pruebas configuradas en testng.xml
-- Reportes automáticos
+### 🧪 TestNG
+- Anotaciones `@BeforeMethod` y `@AfterMethod` para setup y teardown
+- Suite de pruebas configuradas en `testng.xml`
+- Reportes HTML automáticos tras cada ejecución
+- Integración con Maven para CI/CD
+
+---
 
 ## 🔧 Requisitos Previos
 
@@ -173,7 +199,20 @@ mvn clean test -Dsuite=testng.xml
 ### Ejecutar una clase de prueba específica
 
 ```bash
+# Pruebas de Login válido
 mvn test -Dtest=LoginTest
+
+# Pruebas de Login inválido
+mvn test -Dtest=InvalidLoginTest
+
+# Pruebas de Signup
+mvn test -Dtest=SignupTest
+
+# Pruebas de Navegación
+mvn test -Dtest=NavigationTest
+
+# Pruebas de Swipe
+mvn test -Dtest=SwipeTest
 ```
 
 ### Ejecutar un método específico
@@ -181,6 +220,14 @@ mvn test -Dtest=LoginTest
 ```bash
 mvn test -Dtest=LoginTest#testValidLogin
 ```
+
+### Ejecutar con depuración
+
+```bash
+mvn clean test -X
+```
+
+---
 
 ## 📊 Reportes
 
