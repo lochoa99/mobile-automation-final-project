@@ -6,6 +6,12 @@ import org.openqa.selenium.WebElement;
 
 public class LoginScreen extends BaseScreen {
 
+    // --- Localizadores con Page Factory ---
+
+    // ¡Aquí está el localizador nuevo que faltaba!
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Login / Sign up Form\")")
+    private WebElement loginScreenTitle;
+
     @AndroidFindBy(accessibility = "button-sign-up-container")
     private WebElement signUpTab;
 
@@ -42,6 +48,13 @@ public class LoginScreen extends BaseScreen {
 
     public LoginScreen(AndroidDriver driver) {
         super(driver);
+    }
+
+    // --- Métodos de Acción ---
+
+    // ¡Aquí está el método nuevo para el NavigationTest!
+    public boolean isLoginScreenDisplayed() {
+        return isElementVisible(loginScreenTitle);
     }
 
     public void goToSignUpTab() { click(signUpTab); }

@@ -10,38 +10,27 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void testSuccessfulLogin() {
-        MenuScreen menuPage = new MenuScreen(driver);
-        LoginScreen loginPage = new LoginScreen(driver);
+        MenuScreen menuScreen = new MenuScreen(driver);
+        LoginScreen loginScreen = new LoginScreen(driver);
         Faker faker = new Faker();
 
-        // 1. Generamos credenciales únicas que usaremos para TODO el flujo
         String uniqueEmail = faker.internet().emailAddress();
         String password = "SuperPassword123!";
 
-        // --- FASE DE PRECONDICIÓN: Crear el usuario ---
-        menuPage.navigateToLogin();
-        loginPage.goToSignUpTab();
-        loginPage.fillSignUpForm(uniqueEmail, password);
-        loginPage.clickSignUpButton();
+        // Precondición: Crear usuario
+        menuScreen.navigateToLogin();
+        loginScreen.goToSignUpTab();
+        loginScreen.fillSignUpForm(uniqueEmail, password);
+        loginScreen.clickSignUpButton();
+        Assert.assertTrue(loginScreen.isSignupSuccessful(), "Falló la precondición de registro");
+        loginScreen.closePopup();
 
-        // Esperamos que el registro sea exitoso y cerramos el popup
-        Assert.assertTrue(loginPage.isSignupSuccessful(), "Falló la precondición de registro");
-        loginPage.closePopup();
+        // Flujo principal: Login
+        loginScreen.goToLoginTab();
+        loginScreen.fillLoginForm(uniqueEmail, password);
+        loginScreen.clickLoginButton();
 
-        // --- FASE DE PRUEBA: Login Exitoso ---
-        // 2. Volvemos a la pestaña de Login
-        loginPage.goToLoginTab();
-
-        // 3. Llenamos el formulario con las MISMAS credenciales que acabamos de crear [cite: 33, 35]
-        loginPage.fillLoginForm(uniqueEmail, password);
-
-        // 4. Hacemos clic en el botón de Login
-        loginPage.clickLoginButton();
-
-        // 5. Verificamos que aparezca el popup de "Success" [cite: 36]
-        Assert.assertTrue(loginPage.isLoginSuccessful(), "El mensaje de éxito de login no apareció");
-
-        // Dejamos limpio cerrando el popup
-        loginPage.closePopup();
+        Assert.assertTrue(loginScreen.isLoginSuccessful(), "El mensaje de éxito de login no apareció");
+        loginScreen.closePopup();
     }
 }

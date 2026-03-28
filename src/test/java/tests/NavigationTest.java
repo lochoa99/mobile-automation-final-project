@@ -11,24 +11,25 @@ public class NavigationTest extends BaseTest {
 
     @Test
     public void testBottomNavigation() {
-        MenuScreen menuPage = new MenuScreen(driver);
-        HomeScreen homePage = new HomeScreen(driver);
-        LoginScreen loginPage = new LoginScreen(driver);
-        SwipeScreen swipePage = new SwipeScreen(driver);
+        MenuScreen menuScreen = new MenuScreen(driver);
+        HomeScreen homeScreen = new HomeScreen(driver);
+        LoginScreen loginScreen = new LoginScreen(driver);
+        SwipeScreen swipeScreen = new SwipeScreen(driver);
 
-        // Validar condición inicial: estamos en Home [cite: 18]
-        Assert.assertTrue(homePage.isHomePageDisplayed(), "El Home no se mostró correctamente al iniciar");
+        // 1. Verificamos que iniciamos en Home
+        Assert.assertTrue(homeScreen.isHomeScreenDisplayed(), "La pantalla Home no cargó correctamente");
 
-        // Navegar a Login y validar [cite: 20, 21]
-        menuPage.navigateToLogin();
-        Assert.assertTrue(loginPage.isLoginPageDisplayed(), "No se pudo validar la pantalla de Login");
+        // 2. Navegamos a Login
+        menuScreen.navigateToLogin();
+        // ¡Ya actualizamos el nombre a isLoginScreenDisplayed!
+        Assert.assertTrue(loginScreen.isLoginScreenDisplayed(), "La pantalla Login no cargó");
 
-        // Navegar a Swipe y validar [cite: 20, 21]
-        menuPage.navigateToSwipe();
-        Assert.assertTrue(swipePage.isSwipeScreenDisplayed(), "No se pudo validar la pantalla de Swipe");
+        // 3. Naveamos a Swipe
+        menuScreen.navigateToSwipe();
+        Assert.assertTrue(swipeScreen.isSwipeScreenDisplayed(), "La pantalla Swipe no cargó");
 
-        // Volver a Home y validar [cite: 20, 21]
-        menuPage.navigateToHome();
-        Assert.assertTrue(homePage.isHomePageDisplayed(), "No se pudo volver al Home");
+        // 4. Volvemos a Home
+        menuScreen.navigateToHome();
+        Assert.assertTrue(homeScreen.isHomeScreenDisplayed(), "No se pudo volver a la pantalla Home");
     }
 }
