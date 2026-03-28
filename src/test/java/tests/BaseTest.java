@@ -5,32 +5,35 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
 public class BaseTest {
+
     protected AndroidDriver driver;
 
-    // Configuración del driver antes de cada método de prueba para garantizar aislamiento
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
-        UiAutomator2Options options = new UiAutomator2Options();
-        options.setPlatformName("Android");
-        options.setDeviceName("emulator-5554");
-        options.setAutomationName("UiAutomator2");
+    public void setUp() {
+        try {
+            // Set up the exact same capabilities used in the Appium Inspector
+            UiAutomator2Options options = new UiAutomator2Options()
+                    .setPlatformName("Android")
+                    .setDeviceName("emulator-5554")
+                    .setAppPackage("com.wdiodemoapp")
+                    .setAppActivity(".MainActivity") // Forma resumida de la actividad
+                    .setAutoGrantPermissions(true);  // Excelente práctica para evitar popups
 
-        options.setAppPackage("com.wdiodemoapp");
-        options.setAppActivity("com.wdiodemoapp.MainActivity");
+            URL url = new URL("http://127.0.0.1:4723");
 
-        // Capability clave para garantizar el estado limpio discutido en clase
-        options.setCapability("appium:fullReset", true);
-        options.setCapability("uiautomator2ServerLaunchTimeout", 120000);
+            // Inicializando el AndroidDriver con las capacidades del Inspector
+            driver = new AndroidDriver(url, options);
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
+            // Wait implícito establecido en segundos como se vio en clase
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // Wait implícito en segundos como estrategia de localización inicial
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        } catch (Exception e) {
+            throw new RuntimeException("Error al iniciar la sesión de Appium: " + e.getMessage());
+        }
     }
 
     @AfterMethod
