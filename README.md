@@ -9,25 +9,25 @@ Un proyecto de automatización de pruebas para aplicaciones móviles Android uti
 ## 📋 Descripción
 
 Este proyecto automatiza pruebas de regresión para aplicaciones móviles Android, cubriendo escenarios de:
-- **Login**: Validación de credenciales y autenticación
-- **Login Inválido**: Pruebas de casos de error y validación de mensajes
-- **Signup**: Registro de nuevos usuarios
-- **Navegación**: Flujos de navegación en la aplicación
-- **Interacciones**: Gestos como swipe en la aplicación
+- ✅ **Login**: Validación de credenciales y autenticación
+- ✅ **Login Inválido**: Pruebas de casos de error y validación de mensajes
+- ✅ **Signup**: Registro de nuevos usuarios
+- ✅ **Navegación**: Flujos de navegación en la aplicación
+- ✅ **Interacciones**: Gestos como swipe en la aplicación
 
 ---
 
-## 🛠️ Tecnologías y Versiones Específicas
+## 🛠️ Stack Tecnológico
 
-Para garantizar la estabilidad y compatibilidad (evitando errores de clases no encontradas), el proyecto utiliza:
-
-- **Java JDK**: 17 (Amazon Corretto / OpenJDK)
-- **Appium Java Client**: 8.6.0
-- **Selenium Java**: 4.13.0
-- **TestNG**: 7.8.0
-- **Java Faker**: 1.0.2 (Para generación de datos dinámicos)
-- **Maven**: 3.6+
-- **Appium Server**: 2.x con Driver **UiAutomator2**
+| Tecnología | Versión | Descripción |
+|-----------|---------|------------|
+| **Java JDK** | 17 | Amazon Corretto / OpenJDK |
+| **Appium Java Client** | 8.6.0 | Cliente para automatización móvil |
+| **Selenium Java** | 4.13.0 | Framework de automatización web |
+| **TestNG** | 7.8.0 | Framework de pruebas |
+| **Java Faker** | 1.0.2 | Generación de datos dinámicos |
+| **Maven** | 3.6+ | Gestor de dependencias |
+| **Appium Server** | 2.x | Servidor de automatización (Driver UiAutomator2) |
 
 ---
 
@@ -35,26 +35,35 @@ Para garantizar la estabilidad y compatibilidad (evitando errores de clases no e
 
 ```
 mobile-automation-final-project/
-├── src/
-│   └── test/
-│       └── java/
-│           ├── screens/                    # Page Object Models
+│
+├── 📂 src/
+│   ├── 📂 main/
+│   │   ├── 📂 java/
+│   │   │   └── 📂 utils/                   # Clases de utilidad
+│   │   └── 📂 resources/                   # Archivos de recursos
+│   │
+│   └── 📂 test/
+│       └── 📂 java/
+│           ├── 📂 screens/                 # Page Object Models
 │           │   ├── BaseScreen.java         # Clase base con métodos reutilizables
-│           │   ├── HomeScreen.java         # Page Object para la pantalla principal
-│           │   ├── LoginScreen.java        # Page Object para login
-│           │   ├── MenuScreen.java         # Page Object para el menú
-│           │   └── SwipeScreen.java        # Page Object para gestos de swipe
-│           └── tests/                      # Clases de prueba (Test Cases)
-│               ├── BaseTest.java           # Clase base con setup/teardown
+│           │   ├── HomeScreen.java         # Pantalla principal
+│           │   ├── LoginScreen.java        # Pantalla de login
+│           │   ├── MenuScreen.java         # Menú de navegación
+│           │   └── SwipeScreen.java        # Gestos de swipe
+│           │
+│           └── 📂 tests/                   # Test Cases
+│               ├── BaseTest.java           # Clase base (setup/teardown)
 │               ├── LoginTest.java          # Pruebas de login válido
 │               ├── InvalidLoginTest.java   # Pruebas de login inválido
 │               ├── NavigationTest.java     # Pruebas de navegación
 │               ├── SignupTest.java         # Pruebas de registro
-│               └── SwipeTest.java          # Pruebas de gestos swipe
-├── target/                                 # Archivos compilados (generado por Maven)
-│   ├── classes/
-│   ├── test-classes/
-│   └── surefire-reports/                   # Reportes de pruebas
+│               └── SwipeTest.java          # Pruebas de gestos
+│
+├── 📂 target/                              # Compilados y reportes (generado)
+│   ├── 📂 classes/
+│   ├── 📂 test-classes/
+│   └── 📂 surefire-reports/                # Reportes de pruebas
+│
 ├── pom.xml                                 # Configuración de Maven
 ├── testng.xml                              # Configuración de TestNG
 └── README.md
@@ -65,124 +74,192 @@ mobile-automation-final-project/
 ## ✨ Características Principales
 
 ### 🔧 Page Object Model (POM)
-- **BaseScreen**: Clase base con métodos reutilizables para todas las operaciones comunes
-  - `click()` - Hacer click en elementos
-  - `sendKeys()` - Enviar texto a campos
-  - `waitForVisibility()` - Esperar a que elementos sean visibles
-  - `isDisplayed()` - Verificar si un elemento está visible
-  
-- **Screens específicas**: 
-  - `HomeScreen` - Pantalla principal de la aplicación
-  - `LoginScreen` - Pantalla de login con campos de usuario y contraseña
-  - `MenuScreen` - Menú de navegación de la aplicación
-  - `SwipeScreen` - Pantalla para pruebas de gestos
+
+La arquitectura utiliza POM para separar los localizadores de los tests, mejorando la mantenibilidad:
+
+**BaseScreen** - Clase base reutilizable:
+- `click(By locator)` - Hacer click en elementos
+- `sendKeys(By locator, String text)` - Enviar texto a campos
+- `getText(By locator)` - Obtener texto de elementos
+- `waitForVisibility(By locator)` - Esperar a que elementos sean visibles
+- `isDisplayed(By locator)` - Verificar visibilidad
+
+**Screens específicas:**
+- `HomeScreen` - Pantalla principal con métodos de validación
+- `LoginScreen` - Campos de usuario, contraseña y botón login
+- `MenuScreen` - Elementos de navegación del menú
+- `SwipeScreen` - Gestos y validaciones de swipe
 
 ### ⏱️ Gestión de Waits
-- Esperas explícitas configurables (por defecto 10 segundos)
-- Manejo inteligente de elementos con visibilidad controlada
-- Prevención de falsos negativos por timing
+- ⏰ Esperas explícitas configurables (por defecto 10 segundos)
+- 🎯 Manejo inteligente de elementos con visibilidad controlada
+- ✔️ Prevención de falsos negativos por timing
 
-### 📊 Generación de Datos de Prueba
-- Utiliza **JavaFaker** para generar datos dinámicos en tests
-- Datos únicos y aleatorios para cada ejecución
-- Facilita la reutilización de scripts de prueba
+### 📊 Generación de Datos Dinámicos
+- 🎲 Utiliza **JavaFaker** para generar datos únicos
+- 🔄 Datos aleatorios en cada ejecución
+- ♻️ Facilita reutilización de scripts
 
-### 🧪 TestNG
-- Anotaciones `@BeforeMethod` y `@AfterMethod` para setup y teardown
-- Suite de pruebas configuradas en `testng.xml`
-- Reportes HTML automáticos tras cada ejecución
-- Integración con Maven para CI/CD
+### 🧪 Integración TestNG
+- `@BeforeMethod` - Setup antes de cada prueba
+- `@AfterMethod` - Teardown después de cada prueba
+- 📋 Suite de pruebas en `testng.xml`
+- 📊 Reportes HTML automáticos
+- 🔗 Integración con Maven para CI/CD
 
 ---
 
 ## 🔧 Requisitos Previos
 
-- **Java 8 o superior**
-- **Maven 3.6+**
-- **Android Emulator o Device**
-- **Appium Server 2.0+**
-- **Android SDK**
+Antes de ejecutar el proyecto, asegúrate de tener instalado:
+
+### Sistema Operativo
+- Windows 10+ / macOS / Linux
+
+### Herramientas Requeridas
+- **Java JDK 17+** - [Descargar](https://aws.amazon.com/es/corretto/)
+- **Maven 3.6+** - [Descargar](https://maven.apache.org/)
+- **Node.js** - Para instalar Appium
+- **Android SDK** - Incluida en Android Studio
+- **Appium Server 2.x** - Se instala vía npm
 
 ### Instalación de Dependencias
 
-```bash
-# Instalar Maven (si no está instalado)
-# En Windows con Chocolatey:
+**Windows (con Chocolatey):**
+```powershell
 choco install maven
-
-# En macOS con Homebrew:
-brew install maven
+choco install nodejs
 ```
+
+**macOS (con Homebrew):**
+```bash
+brew install maven
+brew install node
+```
+
+**Appium:**
+```bash
+npm install -g appium
+npm install -g appium-doctor
+```
+
+---
 
 ## 🚀 Configuración Inicial
 
-### 1. Clonar el Repositorio
+### 1️⃣ Clonar el Repositorio
 
 ```bash
 git clone <URL-del-repositorio>
 cd mobile-automation-final-project
 ```
 
-### 2. Instalar Appium
+### 2️⃣ Instalar Dependencias del Proyecto
 
 ```bash
-npm install -g appium
-npm install -g appium-doctor
+mvn clean install
 ```
 
-### 3. Verificar Instalación
+### 3️⃣ Verificar Appium
 
 ```bash
 appium-doctor --android
 ```
 
-### 4. Iniciar Appium Server
+Asegúrate de que todos los componentes estén verificados ✓
 
+### 4️⃣ Iniciar Appium Server
+
+En una nueva terminal:
 ```bash
 appium
 ```
 
-El servidor debería iniciarse en `http://127.0.0.1:4723` (puerto por defecto)
+El servidor se iniciará en `http://127.0.0.1:4723` (puerto por defecto)
 
-### 5. Configurar el Emulador
+### 5️⃣ Verificar Dispositivos
 
 ```bash
-# Listar dispositivos disponibles
 adb devices
-
-# Verificar el nombre del emulador (ejemplo: emulator-5554)
 ```
+
+Deberías ver tu emulador listado (ej: `emulator-5554`)
+
+### 6️⃣ Configurar BaseTest.java
+
+Actualiza los parámetros en `src/test/java/tests/BaseTest.java`:
+
+```java
+private static final String DEVICE_NAME = "emulator-5554";      // Tu emulador
+private static final String APP_PACKAGE = "com.wdiodemoapp";    // Paquete de la app
+private static final String APP_ACTIVITY = "com.wdiodemoapp.MainActivity";  // Actividad principal
+private static final String APPIUM_URL = "http://127.0.0.1:4723";
+```
+
+---
 
 ## ⚙️ Configuración del Proyecto
 
-### Actualizar BaseTest.java
-
-Asegúrate de que los siguientes parámetros coincidan con tu entorno:
-
-```java
-options.setDeviceName("emulator-5554");        // Nombre de tu emulador
-options.setAppPackage("com.wdiodemoapp");      // Paquete de la app
-options.setAppActivity("com.wdiodemoapp.MainActivity");  // Actividad principal
-```
-
 ### Configurar testng.xml
 
-Para ejecutar suites específicas de pruebas, edita `testng.xml`:
+El archivo `testng.xml` define qué pruebas ejecutar:
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="WebdriverIO App Test Suite">
     <test name="Regression Tests">
         <classes>
-            <class name="tests.NavigationTest"/>
-            <class name="tests.SignupTest"/>
             <class name="tests.LoginTest"/>
+            <class name="tests.InvalidLoginTest"/>
+            <class name="tests.SignupTest"/>
+            <class name="tests.NavigationTest"/>
             <class name="tests.SwipeTest"/>
         </classes>
     </test>
 </suite>
 ```
 
-## ▶️ Cómo Ejecutar las Pruebas
+### Configurar pom.xml
+
+El archivo `pom.xml` gestiona las dependencias y plugins:
+
+```xml
+<dependencies>
+    <!-- Appium -->
+    <dependency>
+        <groupId>io.appium</groupId>
+        <artifactId>java-client</artifactId>
+        <version>8.6.0</version>
+    </dependency>
+
+    <!-- Selenium -->
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.13.0</version>
+    </dependency>
+
+    <!-- TestNG -->
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.8.0</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- JavaFaker -->
+    <dependency>
+        <groupId>com.github.javafaker</groupId>
+        <artifactId>javafaker</artifactId>
+        <version>1.0.2</version>
+    </dependency>
+</dependencies>
+```
+
+---
+
+## ▶️ Ejecutar Pruebas
 
 ### Ejecutar todas las pruebas
 
@@ -190,46 +267,54 @@ Para ejecutar suites específicas de pruebas, edita `testng.xml`:
 mvn clean test
 ```
 
-### Ejecutar con suite específica
+### Ejecutar suite específica
 
 ```bash
 mvn clean test -Dsuite=testng.xml
 ```
 
-### Ejecutar una clase de prueba específica
+### Ejecutar por clase de prueba
 
 ```bash
-# Pruebas de Login válido
+# Login válido
 mvn test -Dtest=LoginTest
 
-# Pruebas de Login inválido
+# Login inválido
 mvn test -Dtest=InvalidLoginTest
 
-# Pruebas de Signup
+# Registro
 mvn test -Dtest=SignupTest
 
-# Pruebas de Navegación
+# Navegación
 mvn test -Dtest=NavigationTest
 
-# Pruebas de Swipe
+# Gestos Swipe
 mvn test -Dtest=SwipeTest
 ```
 
-### Ejecutar un método específico
+### Ejecutar método específico
 
 ```bash
 mvn test -Dtest=LoginTest#testValidLogin
 ```
 
-### Ejecutar con depuración
+### Ejecutar con salida detallada
 
 ```bash
 mvn clean test -X
 ```
 
+### Ejecutar en paralelo
+
+```bash
+mvn clean test -DparallelRun=true
+```
+
 ---
 
 ## 📊 Reportes
+
+### Ubicación de Reportes
 
 Los reportes se generan automáticamente en:
 
@@ -237,68 +322,270 @@ Los reportes se generan automáticamente en:
 target/surefire-reports/
 ```
 
-Archivos principales:
-- `index.html` - Resumen ejecutivo
-- `emailable-report.html` - Reporte enviable por email
-- `testng-results.xml` - Resultados en formato XML
+### Archivos Principales
 
-## 🧪 Ejemplos de Uso
+| Archivo | Descripción |
+|---------|------------|
+| `index.html` | Resumen ejecutivo con gráficos |
+| `emailable-report.html` | Reporte para enviar por email |
+| `testng-results.xml` | Resultados en formato XML |
+| `TEST-TestSuite.xml` | Detalles de ejecución |
 
-### LoginTest
-```java
-@Test
-public void testValidLogin() {
-    loginPage.enterEmail("user@example.com");
-    loginPage.enterPassword("password123");
-    loginPage.clickLogin();
-    assertTrue(homePage.isHomeScreenDisplayed());
-}
+### Visualizar Reportes
+
+Abre en tu navegador:
 ```
-
-### SwipeTest
-```java
-@Test
-public void testSwipeGesture() {
-    swipePage.navigateToSwipePage();
-    swipePage.performSwipe();
-    assertTrue(swipePage.isNextItemDisplayed());
-}
+target/surefire-reports/index.html
 ```
-
-## 📝 Buenas Prácticas Implementadas
-
-✅ **Page Object Model**: Separación de localizadores y acciones
-✅ **DRY (Don't Repeat Yourself)**: Métodos reutilizables en BasePage
-✅ **Esperas Explícitas**: Manejo robusto de tiempos
-✅ **Datos Dinámicos**: Generación con JavaFaker
-✅ **Estructura Modular**: Fácil de mantener y escalar
-
-## 🐛 Solución de Problemas
-
-### Appium no se conecta
-```
-- Verifica que Appium Server esté corriendo: http://127.0.0.1:4723
-- Revisa la consola de Appium para errores
-- Reinicia el emulador Android
-```
-
-### Dispositivo no encontrado
-```bash
-# Listar dispositivos conectados
-adb devices
-
-# Desconectar y reconectar
-adb disconnect
-adb connect emulator-5554
-```
-
-### Timeout en elementos
-- Aumenta el Duration en BasePage (línea con Duration.ofSeconds(10))
-- Verifica que los localizadores sean correctos
-- Comprueba que la app esté en el estado esperado
 
 ---
 
-**Última actualización**: Marzo 2026
+## 🧪 Ejemplos de Uso
 
-**Versión del Proyecto**: 1.0-SNAPSHOT
+### LoginTest - Ejemplo de Login Válido
+
+```java
+@Test
+public void testValidLogin() {
+    // Arrange
+    String email = "user@example.com";
+    String password = "password123";
+    
+    // Act
+    loginScreen.enterEmail(email);
+    loginScreen.enterPassword(password);
+    loginScreen.clickLogin();
+    
+    // Assert
+    assertTrue(homeScreen.isHomeScreenDisplayed(), 
+        "La pantalla principal no se mostró");
+}
+```
+
+### InvalidLoginTest - Ejemplo de Login Inválido
+
+```java
+@Test
+public void testInvalidLogin() {
+    // Arrange
+    String email = "invalid@test.com";
+    String password = "wrongpassword";
+    
+    // Act
+    loginScreen.enterEmail(email);
+    loginScreen.enterPassword(password);
+    loginScreen.clickLogin();
+    
+    // Assert
+    assertTrue(loginScreen.isErrorMessageDisplayed(), 
+        "El mensaje de error no se mostró");
+    assertEquals(loginScreen.getErrorMessage(), 
+        "Invalid credentials", "Mensaje de error incorrecto");
+}
+```
+
+### SwipeTest - Ejemplo de Gestos
+
+```java
+@Test
+public void testSwipeGesture() {
+    // Arrange
+    swipeScreen.navigateToSwipePage();
+    
+    // Act
+    swipeScreen.performSwipeLeft();
+    
+    // Assert
+    assertTrue(swipeScreen.isNextItemDisplayed(), 
+        "El siguiente item no se mostró después del swipe");
+}
+```
+
+### SignupTest - Ejemplo de Registro
+
+```java
+@Test
+public void testSuccessfulSignup() {
+    // Arrange
+    String fullName = faker.name().fullName();
+    String email = faker.internet().emailAddress();
+    String password = faker.internet().password();
+    
+    // Act
+    signupScreen.enterFullName(fullName);
+    signupScreen.enterEmail(email);
+    signupScreen.enterPassword(password);
+    signupScreen.clickSignUp();
+    
+    // Assert
+    assertTrue(homeScreen.isHomeScreenDisplayed(), 
+        "Usuario no registrado correctamente");
+}
+```
+
+---
+
+## 📝 Buenas Prácticas Implementadas
+
+✅ **Page Object Model (POM)**
+- Separación clara entre localizadores y tests
+- Reutilización de métodos
+
+✅ **DRY (Don't Repeat Yourself)**
+- Métodos reutilizables en BaseScreen
+- Herencia de pantallas
+
+✅ **Esperas Explícitas**
+- Manejo robusto de tiempos
+- Evita flakiness en tests
+
+✅ **Datos Dinámicos**
+- Generación con JavaFaker
+- Tests independientes
+
+✅ **Estructura Modular**
+- Fácil de mantener
+- Escalable para nuevas funcionalidades
+
+✅ **Reportes Automatizados**
+- TestNG genera reportes HTML
+- Integración con Maven
+
+---
+
+## 🐛 Solución de Problemas
+
+### ❌ Appium no se conecta
+
+**Problema:** `Connection refused: http://127.0.0.1:4723`
+
+**Solución:**
+```bash
+# Verifica que Appium esté corriendo
+appium
+
+# Si no inicia, instala drivers
+appium driver install uiautomator2
+
+# Reinicia el emulador
+adb emu kill
+emulator -avd <nombre_emulador>
+```
+
+### ❌ Dispositivo no encontrado
+
+**Problema:** `No connected devices`
+
+**Solución:**
+```bash
+# Lista dispositivos
+adb devices
+
+# Reconecta emulador
+adb disconnect
+adb connect emulator-5554
+
+# Si no aparece, relanza
+adb start-server
+```
+
+### ❌ Timeout en elementos
+
+**Problema:** `TimeoutException: Element not found after 10 seconds`
+
+**Solución:**
+```java
+// En BaseScreen.java, aumenta el tiempo de espera
+private static final Duration WAIT_DURATION = Duration.ofSeconds(20);
+
+// O espera específica en el test
+swipeScreen.waitForElement(By.id("element_id"), 15);
+```
+
+### ❌ Clase no encontrada
+
+**Problema:** `ClassNotFoundException` o imports incorrectos
+
+**Solución:**
+```bash
+# Limpia y reconstruye
+mvn clean install -U
+
+# Verifica versiones
+mvn dependency:tree
+```
+
+### ❌ App no abre
+
+**Problema:** `Error starting app: Cannot find app`
+
+**Solución:**
+```java
+// Verifica en BaseTest.java
+System.out.println("Package: " + APP_PACKAGE);
+System.out.println("Activity: " + APP_ACTIVITY);
+
+// Obtén el paquete real
+adb shell pm list packages | grep <nombre_app>
+
+// Obtén la actividad principal
+adb shell dumpsys window windows | grep mFocusedApp
+```
+
+### ❌ Tests fallidos aleatoriamente (Flakiness)
+
+**Problema:** Los tests pasan a veces y fallan otras
+
+**Solución:**
+```java
+// Aumenta waits explícitas
+waitForVisibility(By.id("element"), 15);
+
+// Usa implicitWait + explicit (con cuidado)
+driver.manage().timeouts()
+    .implicitlyWait(Duration.ofSeconds(5))
+    .pageLoadTimeout(Duration.ofSeconds(15));
+```
+
+---
+
+## 📚 Recursos Adicionales
+
+- [Documentación Appium](https://appium.io/docs/en/latest/)
+- [Documentación Selenium](https://www.selenium.dev/documentation/)
+- [TestNG Official](https://testng.org/)
+- [JavaFaker GitHub](https://github.com/DiUS/java-faker)
+- [Android Debug Bridge (ADB)](https://developer.android.com/studio/command-line/adb)
+
+---
+
+## 🤝 Contribuir
+
+Para contribuir al proyecto:
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT - ver el archivo `LICENSE` para detalles.
+
+---
+
+## 👨‍💻 Autor
+
+**Luis Mateo Ochoa Agudelo**
+- 📧 Email: [tu-email@example.com]
+- 💼 LinkedIn: [tu-linkedin]
+- 🐙 GitHub: [tu-github]
+
+---
+
+**Última actualización:** Marzo 28, 2026  
+**Versión del Proyecto:** 1.0-SNAPSHOT  
+**Estado:** ✅ Estable
